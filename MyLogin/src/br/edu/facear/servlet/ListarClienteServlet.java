@@ -1,6 +1,9 @@
 package br.edu.facear.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,16 +16,16 @@ import br.edu.facear.model.Cliente;
 import br.edu.facear.service.ClienteService;
 
 /**
- * Servlet implementation class CadastrarServlet
+ * Servlet implementation class ListarClienteServlet
  */
-@WebServlet("/CadastrarServlet")
-public class CadastrarServlet extends HttpServlet {
+@WebServlet("/ListarClienteServlet")
+public class ListarClienteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CadastrarServlet() {
+    public ListarClienteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +34,6 @@ public class CadastrarServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		System.out.println("Acesso negado!!!");
 	}
 
@@ -39,24 +41,15 @@ public class CadastrarServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nome=request.getParameter("nome");
-		String cpf=request.getParameter("cpf");
-		String email=request.getParameter("email");
-		String senha=request.getParameter("senha");
-		
 		ClienteService service=new ClienteService();
 		
-		//Obter do Banco de Dados
-		Cliente c=service.cadastrar(nome, cpf, email, senha);
+		List<Cliente> listaCliente=service.listaClientes();
 		
-		//Colocar na área de memória da sessão
-		request.setAttribute("cliente", c);
+		//listaCliente.get(0).get
 		
-		String nextPage="/cadastro.html";
+		request.setAttribute("listaCliente", listaCliente);
 		
-		//if(c != null) {
-			//nextPage="/principal.jsp";
-		//}
+		String nextPage="/listarclientes.jsp";
 		
 		RequestDispatcher rd=getServletContext().getRequestDispatcher(nextPage);
 		rd.forward(request, response);
