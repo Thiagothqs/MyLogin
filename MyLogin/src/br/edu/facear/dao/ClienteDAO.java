@@ -11,6 +11,9 @@ public class ClienteDAO extends GenericDAO {
 	private PreparedStatement ps;
 	private String LOGIN_SQL ="SELECT * FROM TB_CLIENTE WHERE EMAIL = ? AND SENHA = ?;";
 	private String LISTAR_CLIENTE="SELECT * FROM TB_CLIENTE;";
+	private String EXCLUIR_CLIENTE="DELETE FROM TB_CLIENTE WHERE ID=?;";
+	private String ALTERAR_CLIENTE="UPDATE TB_CLIENTE SET NOME=?, CPF=?, EMAIL=?, SENHA=? WHERE ID=?;";
+	private String CADASTRAR_SQL ="INSERT INTO TB_CLIENTE (NOME, CPF, EMAIL, SENHA) values(?, ?, ?, ?);";
 	
 	public Cliente autenticar(String email, String senha) throws SQLException {
 		Cliente c=null;
@@ -55,5 +58,68 @@ public class ClienteDAO extends GenericDAO {
 		closeConnection();
 		
 		return listaClientes;
+	}
+	
+	public void alterar(String id, String nome, String cpf, String email, String senha) throws SQLException {
+		//Cliente c=new Cliente(id, nome, cpf, email, senha);
+		
+		Integer idCliente = Integer.parseInt(id);
+		
+		//Abrir conexão
+		openConnection();
+		
+		ps = connect.prepareStatement(ALTERAR_CLIENTE);
+		ps.setString(1, nome);
+		ps.setString(2, cpf);
+		ps.setString(3, email);
+		ps.setString(4, senha);
+		ps.setInt(5, idCliente);
+		
+		ps.execute();
+		
+		//Fechar conexão
+		closeConnection();
+	}
+	
+	public void excluir(String id) throws SQLException {
+		Integer idCliente=Integer.parseInt(id);
+		
+		//Abrir conexão
+		openConnection();
+		
+		ps = connect.prepareStatement(EXCLUIR_CLIENTE);
+		ps.setInt(1, idCliente);
+		
+		ps.execute();
+		
+		//Fechar conexão
+		closeConnection();
+	}
+	
+	public Cliente cadastrar(String nome, String cpf, String email, String senha) throws SQLException {
+		Cliente c=null;
+		
+		//Abrir conexão
+		openConnection();
+		
+		//Preparar script
+		ps = connect.prepareStatement(CADASTRAR_SQL);
+		ps.setString(1, nome);
+		ps.setString(2, cpf);
+		ps.setString(3, email);
+		ps.setString(4, senha);
+		
+		ResultSet rs=ps.executeQuery();
+		
+		if(rs!=null) {
+			while(rs.next()) {
+				c=new Cliente(rs.getInt("id"), rs.getString(rs.getString("nome")), rs.getString("cpf"), rs.getString("email"), rs.getString("senha"));
+			}
+		}
+		
+		//Fechar conexão
+		closeConnection();
+		
+		return c;
 	}
 }

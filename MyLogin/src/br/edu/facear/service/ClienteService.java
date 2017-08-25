@@ -36,4 +36,15 @@ public class ClienteService {
 		return listaCliente;
 	}
 	
+	public void alterar(String id, String nome, String cpf, String email, String senha) throws SQLException {
+		ClienteDAO dao=new ClienteDAO();
+		
+		dao.alterar(id, nome, cpf, email, senha);
+	}
+	
+	public void excluir(String id) throws SQLException {
+		ClienteDAO dao=new ClienteDAO();
+		
+		dao.excluir(id);
+	}
 }
