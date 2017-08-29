@@ -3,6 +3,7 @@ package br.edu.facear.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,6 +50,12 @@ public class ExcluirClienteServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		String nextPage="/ListarClienteServlet";
+		
+		RequestDispatcher rd=getServletContext().getRequestDispatcher(nextPage);
+		rd.forward(request, response);
+		
 	}
 
 }

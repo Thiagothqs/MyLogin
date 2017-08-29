@@ -30,6 +30,15 @@
 				</tr>
 			</c:forEach>
 			</table>
+			<form action="ExcluirClienteServlet" method="post">
+				<table>
+					<tr>
+						<td>Digite o código que da pessoa que você deseja excluir</td> 
+						<td><input type="text" name="id" id="id"/></td>
+						<td><input type="submit" value="Excluir"/></td>
+					</tr>
+				</table>
+			</form>
 			</c:when>
 			<c:otherwise>
 				<br>

@@ -1,7 +1,6 @@
 package br.edu.facear.service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.facear.dao.CadastrarDAO;
@@ -46,5 +45,11 @@ public class ClienteService {
 		ClienteDAO dao=new ClienteDAO();
 		
 		dao.excluir(id);
+	}
+	
+	public Cliente obterClientePorId(Integer id) throws SQLException {
+		ClienteDAO dao=new ClienteDAO();
+		Cliente c=dao.obterClientePorId(id);
+		return c;
 	}
 }

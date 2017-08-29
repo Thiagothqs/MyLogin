@@ -7,6 +7,10 @@ public class Cliente {
 	private String email;
 	private String senha;
 	
+	public Cliente() {
+		
+	}
+	
 	public Cliente(Integer id, String nome, String cpf, String email, String senha) {
 		this.id=id;
 		this.nome=nome;

@@ -1,7 +1,7 @@
 package br.edu.facear.servlet;
 
 import java.io.IOException;
-import java.util.List;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,16 +14,16 @@ import br.edu.facear.model.Cliente;
 import br.edu.facear.service.ClienteService;
 
 /**
- * Servlet implementation class ListarClienteServlet
+ * Servlet implementation class ObterClienteServlet
  */
-@WebServlet("/ListarClienteServlet")
-public class ListarClienteServlet extends HttpServlet {
+@WebServlet("/ObterClienteServlet")
+public class ObterClienteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListarClienteServlet() {
+    public ObterClienteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +32,24 @@ public class ListarClienteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Acesso negado!!!");
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Cliente cliente=null;
+		
+		//Obter parâmetro id pela URL e Converter id para Integer
+		Integer idCliente=Integer.parseInt(request.getParameter("id"));
+		
+		//Lógica para chamar service
 		ClienteService service=new ClienteService();
+		try {
+			cliente=service.obterClientePorId(idCliente);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
-		List<Cliente> listaCliente=service.listaClientes();
+		request.setAttribute("cliente", cliente);
 		
-		//listaCliente.get(0).get
-		
-		request.setAttribute("listaCliente", listaCliente);
-		
-		String nextPage="/listarclientes.jsp";
-		
-		RequestDispatcher rd=getServletContext().getRequestDispatcher(nextPage);
+		//Redirecionar para detalhesCliente.jsp
+		String nextPage="/detalhesCliente.jsp";
+		RequestDispatcher rd= getServletContext().getRequestDispatcher(nextPage);
 		rd.forward(request, response);
 	}
 

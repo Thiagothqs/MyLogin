@@ -4,8 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.facear.model.Cliente;
+import br.edu.facear.service.ClienteService;
 
 public class ClienteDAO extends GenericDAO {
 	private PreparedStatement ps;
@@ -14,6 +16,7 @@ public class ClienteDAO extends GenericDAO {
 	private String EXCLUIR_CLIENTE="DELETE FROM TB_CLIENTE WHERE ID=?;";
 	private String ALTERAR_CLIENTE="UPDATE TB_CLIENTE SET NOME=?, CPF=?, EMAIL=?, SENHA=? WHERE ID=?;";
 	private String CADASTRAR_SQL ="INSERT INTO TB_CLIENTE (NOME, CPF, EMAIL, SENHA) values(?, ?, ?, ?);";
+	private String SELECIONA="SELECT * FROM TB_CLIENTE WHERE ID=?;";
 	
 	public Cliente autenticar(String email, String senha) throws SQLException {
 		Cliente c=null;
@@ -122,4 +125,25 @@ public class ClienteDAO extends GenericDAO {
 		
 		return c;
 	}
+	public Cliente obterClientePorId(Integer id) throws SQLException {
+		Cliente c=null;
+		ClienteService service=new ClienteService();
+		List<Cliente> listaCliente=service.listaClientes();
+		
+		openConnection();
+		
+		ps=connect.prepareStatement(SELECIONA);
+		ps.setInt(1, id);
+		
+		for(int i=0;i<listaCliente.size();i++) {
+			if(id==listaCliente.get(i).getId()) {
+				c=listaCliente.get(i);
+			}
+		}
+		
+		closeConnection();
+		
+		return c;
+	}
+	
 }
