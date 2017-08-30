@@ -43,8 +43,6 @@ public class ListarClienteServlet extends HttpServlet {
 		
 		List<Cliente> listaCliente=service.listaClientes();
 		
-		//listaCliente.get(0).get
-		
 		request.setAttribute("listaCliente", listaCliente);
 		
 		String nextPage="/listarclientes.jsp";
