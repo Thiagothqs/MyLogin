@@ -66,8 +66,6 @@ public class ClienteDAO extends GenericDAO {
 	public void alterar(String id, String nome, String cpf, String email, String senha) throws SQLException {
 		//Cliente c=new Cliente(id, nome, cpf, email, senha);
 		
-		System.out.println(id);
-		
 		Integer idCliente = Integer.parseInt(id);
 		
 		//Abrir conexão
