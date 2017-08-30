@@ -27,6 +27,12 @@
 					<td>${cliente.cpf}</td>
 					<td>${cliente.email}</td>
 					<td>${cliente.senha}</td>
+					<td>
+					<a href="/MyLogin/ObterClienteServlet?id=${cliente.id}">Exibir</a> 
+					</td>
+					<td>
+					<a href="/MyLogin/ExcluirClienteServlet?id=${cliente.id}">Excluir</a>
+					</td>
 				</tr>
 			</c:forEach>
 			</table>

@@ -59,7 +59,7 @@ public class AutenticarUsuarioServlet extends HttpServlet {
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(nextPage);
 		rd.forward(request, response);
 		
-		System.out.println("Ola " + email + ", sua senha é = " +senha);
+		//System.out.println("Ola " + email + ", sua senha é = " +senha);
 	}
 
 }

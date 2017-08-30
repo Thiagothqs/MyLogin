@@ -3,6 +3,7 @@ package br.edu.facear.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,6 +55,10 @@ public class AlterarClienteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		String nextPage="/ListarClienteServlet";
+		
+		RequestDispatcher rd=getServletContext().getRequestDispatcher(nextPage);
+		rd.forward(request, response);
 	}
 
 }

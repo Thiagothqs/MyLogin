@@ -34,11 +34,14 @@
 		</c:when>
 	</c:choose>
 	
-	ID:<input type="text" value="${cliente.id}" disabled="disabled"/>
-	NOME:<input type="text" value="${cliente.nome}"/>
-	CPF:<input type="text" value="${cliente.cpf}"/>
-	EMAIL:<input type="text" value="${cliente.email}"/>
-	SENHA:<input type="text" value="${cliente.senha}"/>
+	<form action="/MyLogin/AlterarClienteServlet" method="post">
+		ID:<input type="text" id="id" name="id" value="${cliente.id}" readonly="readonly"/>
+		NOME:<input type="text" id="nome" name="nome" value="${cliente.nome}"/>
+		CPF:<input type="text" id="cpf" name="cpf" value="${cliente.cpf}"/>
+		EMAIL:<input type="text" id="email" name="email" value="${cliente.email}"/>
+		SENHA:<input type="text" id="senha" name="senha" value="${cliente.senha}"/>
+		<input type="submit" value="Alterar"/>
+	</form>
 	
 </body>
 </html>

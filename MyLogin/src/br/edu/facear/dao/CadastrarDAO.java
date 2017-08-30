@@ -23,13 +23,13 @@ public class CadastrarDAO extends GenericDAO {
 		ps.setString(3, email);
 		ps.setString(4, senha);
 		
-		ResultSet rs=ps.executeQuery();
+		/*ResultSet rs=ps.executeQuery();
 		
 		if(rs!=null) {
 			while(rs.next()) {
 				c=new Cliente(rs.getInt("id"), rs.getString(rs.getString("nome")), rs.getString("cpf"), rs.getString("email"), rs.getString("senha"));
 			}
-		}
+		}*/
 		
 		//Fechar conexão
 		closeConnection();

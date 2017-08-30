@@ -8,7 +8,14 @@
 <title>Principal</title>
 </head>
 <body>
-<h1>Ola ${cliente.nome}</h1>
-Seu email: <c:out value="${cliente.email}"/>
+	<h1>Ola ${cliente.nome}</h1>
+	Seu email: <c:out value="${cliente.email}"/>
+
+	<form action="/MyLogin/ListarClienteServlet" method="post">
+		<input type="submit" value="Listar Clientes"/>
+	</form>
+	<form action="/MyLogin/CadastrarServlet" method="post">
+		<input type="submit" value="Cadastrar"/>
+	</form>
 </body>
 </html>
